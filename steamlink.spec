@@ -18,6 +18,7 @@ Source0:        %{name}-%{version}-x86_64.tar.xz
 Source1:        %{name}-wrapper
 
 BuildRequires:  chrpath
+BuildRequires:  desktop-file-utils
 BuildRequires:  libappstream-glib
 BuildRequires:  sed
 
