@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+# Wrapper script for Steamlink.
+
+export LD_LIBRARY_PATH="INSTALL_DIR/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
+exec INSTALL_DIR/bin/steamlink "$@" &
+
