@@ -8,7 +8,7 @@
 
 Name:           steamlink
 Version:        1.3.10.259
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Stream games from another computer with Steam
 License:        Steamlink License
 URL:            https://store.steampowered.com/app/353380/Steam_Link/
@@ -43,6 +43,9 @@ mkdir -p %{buildroot}%{_datadir}/
 cp -afr share/icons share/applications %{buildroot}%{_datadir}/
 cp -afr share/appdata %{buildroot}%{_metainfodir}
 
+sed -i -e 's|Exec=/app|Exec=%{_prefix}|g' \
+    %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
+
 # Wrapper script stuff
 mkdir %{buildroot}%{_bindir}
 cat %{SOURCE1} | sed -e 's|INSTALL_DIR|%{_libdir}/%{name}|g' \
@@ -63,5 +66,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
 %{_datadir}/icons/hicolor/256x256/apps/%{desktop_id}.png
 
 %changelog
+* Tue Sep 03 2024 Simone Caronni <negativo17@gmail.com> - 1.3.10.259-2
+- Fix desktop exec line.
+
 * Sun Aug 18 2024 Simone Caronni <negativo17@gmail.com> - 1.3.10.259-1
 - First build.
