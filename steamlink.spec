@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 # Remove bundled libraries from requirements/provides
 %global __requires_exclude ^(libavcodec\\.so.*|libavutil\\.so.*|libKF5DBusAddons\\.so.*|libQt5.*\\.so.*|libSDL2.*\\.so.*|libSDL3.*\\.so.*)$
 %global __provides_exclude ^(libavcodec\\.so.*|libavutil\\.so.*|libKF5DBusAddons\\.so.*|libQt5.*\\.so.*|libSDL2.*\\.so.*|libSDL3.*\\.so.*)$
