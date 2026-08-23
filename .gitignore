@@ -1,3 +1,6 @@
-*.sh
-*.xz
-*.gpg
+*gz
+*bz2
+*xz
+*.desktop
+*.png
+*.xml
