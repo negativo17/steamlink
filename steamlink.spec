@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 # Exclude private libraries
-%global __requires_exclude ^(libavcodec\\.so\\.61.*|libavutil\\.so\\.59.*|libQt6Core\\.so\\.6.*|libQt6Gui\\.so\\.6.*|libQt6Network\\.so\\.6.*|libQt6Widgets\\.so\\.6.*|libSDL3_mixer\\.so\\.0.*|libsteamwebrtc\\.so.*|libvpx\\.so\\.6.*)$
+%global __requires_exclude ^(libavcodec\\.so.*|libavutil\\.so.*|libSDL3_mixer\\.so\\.0.*|libsteamwebrtc\\.so.*|libvpx\\.so\\.6.*|libpyrowave-shared\\.so\\.0.*)$
 %global __provides_exclude_from ^%{_libdir}/%{name}/lib/.*$
 
 %global desktop_id com.valvesoftware.SteamLink
 
 Name:           steamlink
-Version:        1.3.32.316
+Version:        1.4.0.318
 Release:        1%{?dist}
 Summary:        Stream games from another computer with Steam
 License:        Steamlink License
@@ -49,15 +49,14 @@ rm -f \
     lib/libSDL3_ttf.so.*
 
 # Leftover RPATH from Valve's build host
-chrpath -d bin/%{name} lib/libSDL3_mixer.so.0
+chrpath -d bin/%{name} lib/libSDL3_mixer.so.0 lib/libvpx.so.6
 
 %install
 install -p -m 0755 -D bin/%{name} %{buildroot}%{_libdir}/%{name}/bin/%{name}
 install -p -m 0755 -t %{buildroot}%{_libdir}/%{name}/lib -D lib/*.so*
 
 mkdir -p %{buildroot}%{_bindir}
-sed -e 's|INSTALL_DIR|%{_libdir}/%{name}|g' %{SOURCE1} \
-    > %{buildroot}%{_bindir}/%{name}
+sed -e 's|INSTALL_DIR|%{_libdir}/%{name}|g' %{SOURCE1} > %{buildroot}%{_bindir}/%{name}
 chmod 0755 %{buildroot}%{_bindir}/%{name}
 
 install -p -m 0644 -D %{SOURCE2} %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
@@ -84,6 +83,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
 %{_metainfodir}/%{desktop_id}.metainfo.xml
 
 %changelog
+* Tue Oct 06 2026 Simone Caronni <negativo17@gmail.com> - 1.4.0.318-1
+- Update to 1.4.0.318.
+
 * Sun Aug 23 2026 Simone Caronni <negativo17@gmail.com> - 1.3.32.316-1
 - Update to 1.3.32.316.
 - Use upstream tarball.
