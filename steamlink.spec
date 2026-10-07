@@ -2,13 +2,13 @@
 
 # Exclude private libraries
 %global __requires_exclude ^(libavcodec\\.so.*|libavutil\\.so.*|libSDL3_mixer\\.so\\.0.*|libsteamwebrtc\\.so.*|libvpx\\.so\\.6.*|libpyrowave-shared\\.so\\.0.*)$
-%global __provides_exclude_from ^%{_libdir}/%{name}/lib/.*$
+%global __provides_exclude_from ^%{_libdir}/%{name}/.*$
 
 %global desktop_id com.valvesoftware.SteamLink
 
 Name:           steamlink
 Version:        1.4.0.318
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Stream games from another computer with Steam
 License:        Steamlink License
 URL:            https://store.steampowered.com/app/353380/Steam_Link/
@@ -52,8 +52,8 @@ rm -f \
 chrpath -d bin/%{name} lib/libSDL3_mixer.so.0 lib/libvpx.so.6
 
 %install
-install -p -m 0755 -D bin/%{name} %{buildroot}%{_libdir}/%{name}/bin/%{name}
-install -p -m 0755 -t %{buildroot}%{_libdir}/%{name}/lib -D lib/*.so*
+mkdir -p %{buildroot}%{_libdir}/%{name}
+install -p -m 0755 -D bin/%{name} lib/*.so* %{buildroot}%{_libdir}/%{name}/
 
 mkdir -p %{buildroot}%{_bindir}
 sed -e 's|INSTALL_DIR|%{_libdir}/%{name}|g' %{SOURCE1} > %{buildroot}%{_bindir}/%{name}
@@ -76,13 +76,17 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
 %doc README.txt
 %{_bindir}/%{name}
 %dir %{_libdir}/%{name}
-%{_libdir}/%{name}/bin/
-%{_libdir}/%{name}/lib/
+%{_libdir}/%{name}/%{name}
+%{_libdir}/%{name}/lib*.so.*
 %{_datadir}/applications/%{desktop_id}.desktop
 %{_datadir}/icons/hicolor/256x256/apps/%{desktop_id}.png
 %{_metainfodir}/%{desktop_id}.metainfo.xml
 
 %changelog
+* Wed Oct 07 2026 Simone Caronni <negativo17@gmail.com> - 1.4.0.318-2
+- Move the binary and private libraries out of the bin and lib subdirectories.
+- Do not detach from the terminal on command line.
+
 * Tue Oct 06 2026 Simone Caronni <negativo17@gmail.com> - 1.4.0.318-1
 - Update to 1.4.0.318.
 
