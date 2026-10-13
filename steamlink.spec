@@ -1,14 +1,14 @@
 %global debug_package %{nil}
 
 # Exclude private libraries
-%global __requires_exclude ^(libavcodec\\.so.*|libavutil\\.so.*|libSDL3_mixer\\.so\\.0.*|libsteamwebrtc\\.so.*|libvpx\\.so\\.6.*|libpyrowave-shared\\.so\\.0.*)$
+%global __requires_exclude ^(libavcodec\\.so.*|libavutil\\.so.*|libSDL3_mixer\\.so\\.0.*|libsteamwebrtc\\.so.*|libvpx\\.so\\.6.*|libpyrowave-shared\\.so.*)$
 %global __provides_exclude_from ^%{_libdir}/%{name}/.*$
 
 %global desktop_id com.valvesoftware.SteamLink
 
 Name:           steamlink
-Version:        1.4.0.318
-Release:        2%{?dist}
+Version:        1.4.1.319
+Release:        1%{?dist}
 Summary:        Stream games from another computer with Steam
 License:        Steamlink License
 URL:            https://store.steampowered.com/app/353380/Steam_Link/
@@ -83,6 +83,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
 %{_metainfodir}/%{desktop_id}.metainfo.xml
 
 %changelog
+* Tue Oct 13 2026 Simone Caronni <negativo17@gmail.com> - 1.4.1.319-1
+- Update to 1.4.1.319.
+
 * Wed Oct 07 2026 Simone Caronni <negativo17@gmail.com> - 1.4.0.318-2
 - Move the binary and private libraries out of the bin and lib subdirectories.
 - Do not detach from the terminal on command line.
