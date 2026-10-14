@@ -7,7 +7,7 @@
 %global desktop_id com.valvesoftware.SteamLink
 
 Name:           steamlink
-Version:        1.4.1.319
+Version:        1.4.2.321
 Release:        1%{?dist}
 Summary:        Stream games from another computer with Steam
 License:        Steamlink License
@@ -83,6 +83,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
 %{_metainfodir}/%{desktop_id}.metainfo.xml
 
 %changelog
+* Wed Oct 14 2026 Simone Caronni <negativo17@gmail.com> - 1.4.2.321-1
+- Update to 1.4.2.321.
+
 * Tue Oct 13 2026 Simone Caronni <negativo17@gmail.com> - 1.4.1.319-1
 - Update to 1.4.1.319.
 
