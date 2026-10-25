@@ -3,4 +3,8 @@
 
 export LD_LIBRARY_PATH="INSTALL_DIR${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
+# Make the NVIDIA VA-API driver fail so Vulkan Video is used, the VA-API path crashes:
+# https://github.com/ValveSoftware/steam-for-linux/issues/13804
+export NVD_GPU="${NVD_GPU:-99}"
+
 exec INSTALL_DIR/steamlink "$@"
