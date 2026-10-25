@@ -1,14 +1,14 @@
 %global debug_package %{nil}
 
 # Exclude private libraries
-%global __requires_exclude ^(libavcodec\\.so.*|libavutil\\.so.*|libSDL3_mixer\\.so\\.0.*|libsteamwebrtc\\.so.*|libvpx\\.so\\.6.*|libpyrowave-shared\\.so.*)$
+%global __requires_exclude ^(libavcodec\\.so.*|libavutil\\.so.*|libSDL.*\\.so\\.0.*|libsteamwebrtc\\.so.*|libvpx\\.so\\.6.*|libpyrowave-shared\\.so.*)$
 %global __provides_exclude_from ^%{_libdir}/%{name}/.*$
 
 %global desktop_id com.valvesoftware.SteamLink
 
 Name:           steamlink
 Version:        1.4.3.323
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Stream games from another computer with Steam
 License:        Steamlink License
 URL:            https://store.steampowered.com/app/353380/Steam_Link/
@@ -43,13 +43,10 @@ network, and start playing your existing Steam games.
 
 # Use the system libraries where possible
 rm -f \
-    lib/libSDL2_ttf* \
-    lib/libSDL3.so.* \
-    lib/libSDL3_image.so.* \
-    lib/libSDL3_ttf.so.*
+    lib/libSDL2_ttf*
 
-# Leftover RPATH from Valve's build host
-chrpath -d bin/%{name} lib/libSDL3_mixer.so.0 lib/libvpx.so.6
+# Remove RPATH/RUNPATH
+chrpath -d bin/%{name} lib/lib*
 
 %install
 mkdir -p %{buildroot}%{_libdir}/%{name}
@@ -83,6 +80,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
 %{_metainfodir}/%{desktop_id}.metainfo.xml
 
 %changelog
+* Sun Oct 25 2026 Simone Caronni <negativo17@gmail.com> - 1.4.3.323-2
+- Restore bundled snapshot of SDL3.
+
 * Sun Oct 25 2026 Simone Caronni <negativo17@gmail.com> - 1.4.3.323-1
 - Update to 1.4.3.323.
 
