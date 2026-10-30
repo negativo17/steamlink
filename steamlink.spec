@@ -7,8 +7,8 @@
 %global desktop_id com.valvesoftware.SteamLink
 
 Name:           steamlink
-Version:        1.4.3.323
-Release:        2%{?dist}
+Version:        1.4.5.326
+Release:        1%{?dist}
 Summary:        Stream games from another computer with Steam
 License:        Steamlink License
 URL:            https://store.steampowered.com/app/353380/Steam_Link/
@@ -80,6 +80,10 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_id}.desktop
 %{_metainfodir}/%{desktop_id}.metainfo.xml
 
 %changelog
+* Fri Oct 30 2026 Simone Caronni <negativo17@gmail.com> - 1.4.5.326-1
+- Update to 1.4.5.326.
+- Remove NVIDIA workaround.
+
 * Sun Oct 25 2026 Simone Caronni <negativo17@gmail.com> - 1.4.3.323-2
 - Restore bundled snapshot of SDL3.
 
